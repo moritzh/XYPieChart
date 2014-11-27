@@ -218,6 +218,16 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
     [_pieView.layer setCornerRadius:_pieRadius];
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    CGRect bounds = [[self layer] bounds];
+
+    self.pieRadius = MIN(bounds.size.width/2, bounds.size.height/2) - 10;
+    self.pieCenter = CGPointMake(bounds.size.width/2, bounds.size.height/2);
+    
+    [self reloadData];
+}
+
 - (void)setPieBackgroundColor:(UIColor *)color
 {
     [_pieView setBackgroundColor:color];
